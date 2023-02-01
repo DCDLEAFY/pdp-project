@@ -18,22 +18,28 @@ namespace video_game.Data
                             Title = "First game",
                             Description = "First Description",
                             Genre = "First Genre",
-                            RRP = 1
+                            RRP = 1,
+                            ImagePath = string.Empty,
+                            isDeleted= false
                         },
                         new Game()
                         {
                             Title = "Second game",
                             Description = "Second Description",
                             Genre = "Second Genre",
-                            RRP = 2
+                            RRP = 2,
+                            ImagePath = string.Empty,
+                            isDeleted = false
                         },
-                        new Game() 
+                        new Game()
                         {
                             Title = "Third game",
                             Description = "Third Description",
                             Genre = "Third Genre",
-                            RRP = 3
-                        });
+                            RRP = 3,
+                            ImagePath = string.Empty,
+                            isDeleted = false
+                        }); ;
 
                     context.SaveChanges();
                 }

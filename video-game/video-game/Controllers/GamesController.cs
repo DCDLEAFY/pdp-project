@@ -32,6 +32,14 @@ namespace video_game.Controllers
             return Ok(allGames);
         }
 
+        [HttpGet("get-all-games-available")]
+        public IActionResult GetAllGamesAvailable()
+        {
+            var allGamesAvailable = _gamesService.GetAllGamesAvailable();
+            return Ok(allGamesAvailable);
+        }
+
+
         [HttpGet("get-game-by-id/{id}")]
         public IActionResult GetGameById(int id)
         {
@@ -57,7 +65,7 @@ namespace video_game.Controllers
         [HttpDelete("delete-game-by-id/{id}")]
         public IActionResult DeleteGameById(int id)
         {
-            var deletedGame = _gamesService.DeleteGameById(id);
+            var deletedGame = _gamesService.HardDeleteGameById(id);
             if (deletedGame == null)
             {
                 return BadRequest();

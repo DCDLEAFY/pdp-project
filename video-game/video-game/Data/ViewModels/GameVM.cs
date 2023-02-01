@@ -9,5 +9,9 @@
         public string? Genre { get; set; }
 
         public double? RRP { get; set; }
+
+        public string ImagePath { get; set; }
+
+        public Boolean? isDeleted { get; set; }
     }
 }

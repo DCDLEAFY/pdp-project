@@ -12,6 +12,8 @@
 
         public double? RRP { get; set; }
 
-        //Place Image here
+        public string ImagePath { get; set; }
+
+        public Boolean? isDeleted { get; set; }
     }
 }
