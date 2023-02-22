@@ -1,6 +1,12 @@
-﻿namespace video_game.Data.ViewModels
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace v_repository.Data.Dto
 {
-    public class GameVM
+    public class GameQueryDto
     {
         public string? Title { get; set; }
 
@@ -13,5 +19,6 @@
         public string ImagePath { get; set; }
 
         public Boolean? isDeleted { get; set; }
+
     }
 }

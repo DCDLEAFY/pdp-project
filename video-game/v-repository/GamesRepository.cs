@@ -1,19 +1,25 @@
-﻿using System.Linq.Expressions;
-using video_game.Data.Models;
-using video_game.Data.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using v_repository.Data;
+using v_repository.Data.Models;
+using v_repository.Data.Dto;
 
-namespace video_game.Data.Services
+
+namespace v_repository
 {
-    public class GamesService
+    public class GamesRepository
     {
         private AppDbContext _context;
-        
-        public GamesService(AppDbContext context)
+
+        public GamesRepository(AppDbContext context)
         {
-            _context= context;
+            _context = context;
         }
 
-        public void AddGame(GameVM game)
+        public void AddGame(GameQueryDto game)
         {
             var _game = new Game()
             {
@@ -34,12 +40,12 @@ namespace video_game.Data.Services
             return _context.Games.ToList();
         }
 
-        public Game GetGameById(int id)
+        public Game? GetGameById(int id)
         {
             return _context.Games.FirstOrDefault(element => element.Id == id);
         }
 
-        public Game UpdateGameById(int id, GameVM game)
+        public Game? UpdateGameById(int id, GameQueryDto game)
         {
             var _game = GetGameById(id);
             if (_game != null)
@@ -56,28 +62,15 @@ namespace video_game.Data.Services
             return _game;
         }
 
-        public Game HardDeleteGameById(int id)
-        {
-            var _game = GetGameById(id);
-            if(_game != null)
-            {
-                _context.Games.Remove(_game);
-                _context.SaveChanges();
-                return _game;
-            }
-
-            return _game;
-        }
-
-        public Game GetGameByTitle(string title)
+        public Game? GetGameByTitle(string title)
         {
             return _context.Games.FirstOrDefault(element => element.Title == title);
         }
 
-        public Game SoftDeleteGameByTitle(string title)
+        public Game? SoftDeleteGameByTitle(string title)
         {
             var _game = GetGameByTitle(title);
-            if(_game != null)
+            if (_game != null)
             {
                 _game.isDeleted = true;
 
@@ -92,7 +85,7 @@ namespace video_game.Data.Services
             List<Game> games = _context.Games.ToList();
             foreach (var game in games.ToList())
             {
-                if(game.isDeleted == true)
+                if (game.isDeleted == true)
                 {
                     games.Remove(game);
                 }

@@ -4,17 +4,17 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:49412",
-      "sslPort": 44397
+      "applicationUrl": "http://localhost:10647",
+      "sslPort": 44300
     }
   },
   "profiles": {
-    "video_game": {
+    "v_controller": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7117;http://localhost:5005",
+      "applicationUrl": "https://localhost:7257;http://localhost:5041",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

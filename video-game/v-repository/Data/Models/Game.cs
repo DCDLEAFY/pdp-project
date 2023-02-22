@@ -1,4 +1,10 @@
-﻿namespace video_game.Data.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace v_repository.Data.Models
 {
     public class Game
     {

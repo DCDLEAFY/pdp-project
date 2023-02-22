@@ -1,6 +1,5 @@
-using video_game.Data;
+using v_repository.Data;
 using Microsoft.EntityFrameworkCore;
-using video_game.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +15,6 @@ string? connString = builder.Configuration.GetConnectionString("DefaultConnectio
 //Add possible check to see if connstring is not null here
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connString));
 
-//Configure Services
-builder.Services.AddTransient<GamesService>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,7 +29,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-AppDbInitialiser.Seed(app);
 
 app.Run();
