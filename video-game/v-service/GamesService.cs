@@ -10,9 +10,10 @@ using Domain.Interfaces;
 
 namespace Application
 {
-	public class GamesService
+	public class GamesService : IService
 	{
 		public IRepository _gamesRepository;
+		
 
 		public GamesService(IRepository gameRepository)
 		{

@@ -10,10 +10,10 @@ namespace WebApi.Controllers
     public class GameStoreController : Controller
     {
 
-        public GamesService _gamesService;
+        public IService _gamesService;
 
 
-        public GameStoreController(GamesService gamesService)
+        public GameStoreController(IService gamesService)
         {
             _gamesService = gamesService;
         }
@@ -30,13 +30,6 @@ namespace WebApi.Controllers
         {
             var allGames = _gamesService.GetAllGamesFromStore();
             return Ok(allGames);
-        }
-
-        [HttpGet("get-all-games-available")]
-        public async Task<IActionResult> GetAllGamesAvailable()
-        {
-            var allGamesAvailable = _gamesService.GetAllAvailableGamesFromStore();
-            return Ok(allGamesAvailable);
         }
 
         [HttpPut("update-game/{id}")]

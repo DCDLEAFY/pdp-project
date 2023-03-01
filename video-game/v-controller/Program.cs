@@ -4,6 +4,7 @@ using Domain.Interfaces;
 using Domain.Models;
 using Persistence;
 using Microsoft.Extensions.Options;
+using Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 
 //Add Interfaces
 builder.Services.AddScoped<IRepository, GamesRepository>();
+
+builder.Services.AddScoped<IService, GamesService>();
 
 var app = builder.Build();
 
