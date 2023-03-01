@@ -1,5 +1,9 @@
-using v_repository.Data;
+using Persistence.Data;
 using Microsoft.EntityFrameworkCore;
+using Domain.Interfaces;
+using Domain.Models;
+using Persistence;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +18,9 @@ string? connString = builder.Configuration.GetConnectionString("DefaultConnectio
 
 //Add possible check to see if connstring is not null here
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connString));
+
+//Add Interfaces
+builder.Services.AddScoped<IRepository, GamesRepository>();
 
 var app = builder.Build();
 

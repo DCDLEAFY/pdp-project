@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace v_repository.Data.Models
+namespace Domain.Models
 {
-    public class Game
+    public class GameQueryDto
     {
-        public int Id { get; set; }
-
         public string? Title { get; set; }
 
         public string? Description { get; set; }
@@ -21,5 +19,6 @@ namespace v_repository.Data.Models
         public string ImagePath { get; set; }
 
         public Boolean? isDeleted { get; set; }
+
     }
 }

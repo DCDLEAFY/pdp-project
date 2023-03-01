@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using v_repository.Data.Models;
+//using Persistence.Data.Models;
+using Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace v_repository.Data
+namespace Persistence.Data
 {
     public class AppDbContext : DbContext
     {

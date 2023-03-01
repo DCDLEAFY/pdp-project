@@ -1,96 +1,71 @@
-﻿using System;
+﻿using Domain.Interfaces;
+using Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using Persistence.Data;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using v_repository.Data;
-using v_repository.Data.Models;
-using v_repository.Data.Dto;
 
-
-namespace v_repository
+namespace Persistence
 {
-    public class GamesRepository
+    public class GamesRepository : IRepository
     {
-        private AppDbContext _context;
+        public AppDbContext _context;
 
         public GamesRepository(AppDbContext context)
         {
             _context = context;
         }
 
-        public void AddGame(GameQueryDto game)
+        public async Task<GameQueryDto> Add(GameQueryDto record)
         {
-            var _game = new Game()
+            var newRecord = new Game()
             {
-                Title = game.Title,
-                Description = game.Description,
-                Genre = game.Genre,
-                RRP = game.RRP,
-                ImagePath = game.ImagePath,
-                isDeleted = game.isDeleted
+                Title = record.Title,
+                Description = record.Description,
+                Genre = record.Genre,
+                RRP = record.RRP,
+                ImagePath = record.ImagePath,
+                isDeleted = record.isDeleted
             };
+            await _context.Games.AddAsync(newRecord);
 
-            _context.Add(_game);
-            _context.SaveChanges();
+            return record;
         }
 
-        public List<Game> GetAllGames()
+        public async Task<Game> DeleteById(int id)
         {
-            return _context.Games.ToList();
-        }
-
-        public Game? GetGameById(int id)
-        {
-            return _context.Games.FirstOrDefault(element => element.Id == id);
-        }
-
-        public Game? UpdateGameById(int id, GameQueryDto game)
-        {
-            var _game = GetGameById(id);
-            if (_game != null)
+            var game = await _context.Games.FirstOrDefaultAsync(x => x.Id == id);
+            if (game != null)
             {
-                _game.Title = game.Title;
-                _game.Description = game.Description;
-                _game.Genre = game.Genre;
-                _game.RRP = game.RRP;
-                _game.ImagePath = game.ImagePath;
-                _game.isDeleted = game.isDeleted;
-
-                _context.SaveChanges();
-            }
-            return _game;
-        }
-
-        public Game? GetGameByTitle(string title)
-        {
-            return _context.Games.FirstOrDefault(element => element.Title == title);
-        }
-
-        public Game? SoftDeleteGameByTitle(string title)
-        {
-            var _game = GetGameByTitle(title);
-            if (_game != null)
-            {
-                _game.isDeleted = true;
-
-                _context.SaveChanges();
-                return _game;
+                _context.Remove(game);
+                return game;
             }
 
-            return _game;
+            return null;
         }
-        public List<Game> GetAllGamesAvailable()
+
+        public async Task<IEnumerable<Game>> GetAll()
         {
-            List<Game> games = _context.Games.ToList();
-            foreach (var game in games.ToList())
-            {
-                if (game.isDeleted == true)
-                {
-                    games.Remove(game);
-                }
-            }
-            return games;
+            return await _context.Games.Include(a => a.Id)
+                                        .Include(a => a.RRP)
+                                        .Include(a => a.Genre)
+                                        .Include(a => a.Description)
+                                        .Include(a => a.isDeleted)
+                                        .ToListAsync();
+        }
+
+        public async Task<Game> GetById(int id)
+        {
+            return await _context.Games.FindAsync(id);
+        }
+
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }
