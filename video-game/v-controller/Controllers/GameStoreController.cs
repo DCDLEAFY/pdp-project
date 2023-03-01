@@ -4,6 +4,8 @@ using Domain.Models;
 using Application;
 using Microsoft.Identity.Client;
 using Domain.Interfaces;
+using WebApi.Data.Options;
+using Microsoft.Extensions.Options;
 
 namespace WebApi.Controllers
 {
@@ -11,11 +13,19 @@ namespace WebApi.Controllers
     {
 
         public GamesService _gamesService;
+        public ConnectionStringsOptions _connectionStringsOptions;
 
 
-        public GameStoreController(GamesService gamesService)
+        public GameStoreController(GamesService gamesService, IOptions<ConnectionStringsOptions> connectionStringsOption)
         {
             _gamesService = gamesService;
+            _connectionStringsOptions = connectionStringsOption.Value;
+        }
+
+        [HttpGet("get-db")]
+        public async Task<IActionResult> GetDB()
+        {
+            return Ok(_connectionStringsOptions.DefaultConnectionString);
         }
 
         [HttpPost("add-game")]

@@ -4,6 +4,7 @@ using Domain.Interfaces;
 using Domain.Models;
 using Persistence;
 using Microsoft.Extensions.Options;
+using WebApi.Data.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Ioptions
+builder.Services.Configure<ConnectionStringsOptions>(builder.Configuration.GetSection(ConnectionStringsOptions.ConnectionStrings));
+
 
 string? connString = builder.Configuration.GetConnectionString("DefaultConnectionString");
 
