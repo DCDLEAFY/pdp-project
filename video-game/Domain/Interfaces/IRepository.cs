@@ -10,10 +10,12 @@ namespace Domain.Interfaces
 {
     public interface IRepository
     {
-        Task<IEnumerable<Game>> GetAll();
         Task<Game> GetById(int id);
-        Task<GameQueryDto> Add(GameQueryDto record);
+        Task<Game> Add(Game record);
         Task<Game> DeleteById(int id);
+        Task<IEnumerable<Game>> GetGamesByTitle(string title);
         Task SaveChanges();
+        Task<IEnumerable<Game>> GetAll();
+        Task<Game> UpdateGameFromStoreById(int id, Game updatedGame);
     }
 }

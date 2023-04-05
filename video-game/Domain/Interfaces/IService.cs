@@ -11,7 +11,8 @@ namespace Domain.Interfaces
     {
         void AddGameToStore(GameQueryDto game);
         Task<Game> UpdateGameFromStoreById(int id, GameQueryDto game);
-        Task<IEnumerable<Game>> GetAllGamesFromStore();
-        Task<Game> RemoveGameFromStoreByTitle(string title);
+        Task<IEnumerable<Game>> RemoveGameFromStoreByTitle(string title);
+        Task<IEnumerable<Game>> GetGamesByTitle(string title);
+        Task<IEnumerable<Game>> GetAllGame();
     }
 }

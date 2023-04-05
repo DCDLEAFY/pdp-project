@@ -22,49 +22,45 @@ namespace Application
 
 		public async void AddGameToStore(GameQueryDto game)
 		{
-			await _gamesRepository.Add(game);
-			await _gamesRepository.SaveChanges();
+            Game addGame = new Game()
+            {
+                Title = game.Title,
+                isDeleted = game.isDeleted,
+                Description = game.Description,
+                RRP = game.RRP,
+                Genre = game.Genre
+            };
+
+            await _gamesRepository.Add(addGame);
 		}
 
 		public async Task<Game> UpdateGameFromStoreById(int id, GameQueryDto game)
 		{
-			if (_gamesRepository.GetById(id) == null) return null;
+			Game updatedGame = new Game()
+			{
+				Title = game.Title,
+				isDeleted = game.isDeleted,
+				Description = game.Description,
+				RRP = game.RRP,
+				Genre = game.Genre
+			};
 
-            _gamesRepository.GetById(id).Result.Title = game.Title;
-            _gamesRepository.GetById(id).Result.Description = game.Description;
-            _gamesRepository.GetById(id).Result.RRP = game.RRP;
-            _gamesRepository.GetById(id).Result.isDeleted = game.isDeleted;
-            _gamesRepository.GetById(id).Result.Genre = game.Genre;
-            _gamesRepository.GetById(id).Result.ImagePath = game.ImagePath;
-
-			await _gamesRepository.SaveChanges();
-
-			return _gamesRepository.GetById(id).Result;
-
+			return await _gamesRepository.UpdateGameFromStoreById(id, updatedGame);
         }
 
-		public async Task<IEnumerable<Game>> GetAllGamesFromStore()
+		public async Task<IEnumerable<Game>> GetGamesByTitle(string title)
 		{
-			return _gamesRepository.GetAll().Result;
+			return await _gamesRepository.GetGamesByTitle(title);
 		}
 
-		public async Task<IEnumerable<Game>> GetAllAvailableGamesFromStore() 
+		public async Task<IEnumerable<Game>> RemoveGameFromStoreByTitle(string title)
 		{
-			//Not too sure about this
-			return _gamesRepository.GetAll().Result.Where(X => X.isDeleted == false);
+			return await _gamesRepository.GetGamesByTitle(title);
 		}
 
-		public async Task<Game> RemoveGameFromStoreByTitle(string title)
+        public Task<IEnumerable<Game>> GetAllGame()
 		{
-			var result = _gamesRepository.GetAll().Result.FirstOrDefault(x => x.Title == title);
-
-            if ( result == null) return null;
-
-			result.isDeleted = true;
-			
-			await _gamesRepository.SaveChanges();
-
-			return result;
+			return _gamesRepository.GetAll();
 		}
     }
 }
