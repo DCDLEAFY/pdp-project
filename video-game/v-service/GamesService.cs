@@ -32,9 +32,7 @@ namespace Application
 				ImagePath = game.ImagePath,
             };
 
-            var result = await _gamesRepository.Add(addGame);
-			if (result != null) return result;
-			return result;
+            return await _gamesRepository.Add(addGame);
 		}
 
 		public async Task<Game> UpdateGameFromStoreById(int id, GameDto game)
