@@ -20,7 +20,7 @@ namespace Application
 			_gamesRepository = gameRepository;
         }
 
-		public async void AddGameToStore(GameDto game)
+		public async Task<Game> AddGameToStore(GameDto game)
 		{
             Game addGame = new Game()
             {
@@ -32,7 +32,9 @@ namespace Application
 				ImagePath = game.ImagePath,
             };
 
-            await _gamesRepository.Add(addGame);
+            var result = await _gamesRepository.Add(addGame);
+			if (result != null) return result;
+			return result;
 		}
 
 		public async Task<Game> UpdateGameFromStoreById(int id, GameDto game)

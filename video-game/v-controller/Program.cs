@@ -5,6 +5,7 @@ using Domain.Models;
 using Persistence;
 using Microsoft.Extensions.Options;
 using Application;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,9 @@ builder.Services.AddCors(config => {
         policy.AllowAnyOrigin();
     });
 });
+
+//Register Mediatr
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 var app = builder.Build();
 
