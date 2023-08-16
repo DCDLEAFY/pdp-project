@@ -6,6 +6,7 @@ using Persistence;
 using Microsoft.Extensions.Options;
 using Application;
 using System.Reflection;
+using Application.Mediatr.Request;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +37,7 @@ builder.Services.AddCors(config => {
 });
 
 //Register Mediatr
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
 
 var app = builder.Build();
 
