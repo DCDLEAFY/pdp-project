@@ -11,4 +11,10 @@
     <ProjectReference Include="..\v-repository\Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mediatr\Handler\" />
+    <Folder Include="Mediatr\Response\" />
+    <Folder Include="Mediatr\Request\" />
+  </ItemGroup>
+
 </Project>

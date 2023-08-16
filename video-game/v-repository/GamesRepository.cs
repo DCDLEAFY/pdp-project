@@ -91,7 +91,7 @@ namespace Persistence
 
         public async Task SaveChanges()
         {
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
     }

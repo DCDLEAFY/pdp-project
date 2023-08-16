@@ -28,7 +28,8 @@ namespace Application
                 isDeleted = game.isDeleted,
                 Description = game.Description,
                 RRP = game.RRP,
-                Genre = game.Genre
+                Genre = game.Genre,
+				ImagePath = game.ImagePath,
             };
 
             await _gamesRepository.Add(addGame);

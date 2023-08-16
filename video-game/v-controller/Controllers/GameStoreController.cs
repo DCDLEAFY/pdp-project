@@ -63,7 +63,7 @@ namespace WebApi.Controllers
         {
             var allGames= await _gamesService.GetAllGame();
             Console.WriteLine(allGames.ToString());
-            return Ok();
+            return Ok(allGames);
         }
 
     }

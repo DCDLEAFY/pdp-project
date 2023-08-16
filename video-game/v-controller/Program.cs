@@ -25,7 +25,18 @@ builder.Services.AddScoped<IRepository, GamesRepository>();
 
 builder.Services.AddScoped<IService, GamesService>();
 
+builder.Services.AddCors(config => {
+    config.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowAnyOrigin();
+    });
+});
+
 var app = builder.Build();
+
+app.UseCors();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
