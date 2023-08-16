@@ -10,10 +10,10 @@ namespace WebApi.Controllers
     public class GameStoreController : Controller
     {
 
-        public IService _gamesService;
+        public IGameService _gamesService;
 
 
-        public GameStoreController(IService gamesService)
+        public GameStoreController(IGameService gamesService)
         {
             _gamesService = gamesService;
         }

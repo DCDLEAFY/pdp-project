@@ -7,7 +7,7 @@ using Domain.Models;
 
 namespace Domain.Interfaces
 {
-    public interface IService
+    public interface IGameService
     {
         void AddGameToStore(GameQueryDto game);
         Task<Game> UpdateGameFromStoreById(int id, GameQueryDto game);

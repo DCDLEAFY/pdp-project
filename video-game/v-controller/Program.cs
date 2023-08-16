@@ -23,7 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 //Add Interfaces
 builder.Services.AddScoped<IRepository, GamesRepository>();
 
-builder.Services.AddScoped<IService, GamesService>();
+builder.Services.AddScoped<IGameService, GamesService>();
 
 builder.Services.AddCors(config => {
     config.AddDefaultPolicy(policy =>
