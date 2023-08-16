@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Models
 {
-    public class GameQueryDto
+    public class GameDto
     {
         public string? Title { get; set; }
 

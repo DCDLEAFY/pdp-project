@@ -9,8 +9,8 @@ namespace Domain.Interfaces
 {
     public interface IGameService
     {
-        void AddGameToStore(GameQueryDto game);
-        Task<Game> UpdateGameFromStoreById(int id, GameQueryDto game);
+        void AddGameToStore(GameDto game);
+        Task<Game> UpdateGameFromStoreById(int id, GameDto game);
         Task<IEnumerable<Game>> RemoveGameFromStoreByTitle(string title);
         Task<IEnumerable<Game>> GetGamesByTitle(string title);
         Task<IEnumerable<Game>> GetAllGame();

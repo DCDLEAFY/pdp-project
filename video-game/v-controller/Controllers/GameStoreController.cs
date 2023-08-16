@@ -19,14 +19,14 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("add-game")]
-        public async Task<IActionResult> AddGame([FromBody] GameQueryDto game)
+        public async Task<IActionResult> AddGame([FromBody] GameDto game)
         {
             _gamesService.AddGameToStore(game);
             return Ok(game);
         }
 
         [HttpPut("update-game/{id}")]
-        public async Task<IActionResult> UpdateGameById(int id, [FromBody] GameQueryDto game)
+        public async Task<IActionResult> UpdateGameById(int id, [FromBody] GameDto game)
         {
             var updatedGame = _gamesService.UpdateGameFromStoreById(id, game);
 
