@@ -12,9 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mediatr\Handler\" />
-    <Folder Include="Mediatr\Response\" />
-    <Folder Include="Mediatr\Request\" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
   </ItemGroup>
 
 </Project>

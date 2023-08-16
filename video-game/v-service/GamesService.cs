@@ -42,6 +42,7 @@ namespace Application
 				Title = game.Title,
 				isDeleted = game.isDeleted,
 				Description = game.Description,
+				ImagePath = game.ImagePath,
 				RRP = game.RRP,
 				Genre = game.Genre
 			};
