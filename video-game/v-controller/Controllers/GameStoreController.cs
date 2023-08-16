@@ -66,8 +66,6 @@ namespace WebApi.Controllers
         {
             var games = _gamesService.RemoveGameFromStoreByTitle(title);
             return Ok(games);
-
-
         }
 
         [HttpGet("testing-getall")]
@@ -77,6 +75,5 @@ namespace WebApi.Controllers
             Console.WriteLine(allGames.ToString());
             return Ok(allGames);
         }
-
     }
 }
